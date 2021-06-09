@@ -1,24 +1,67 @@
-# README
+# テーブル設計
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## users テーブル
 
-Things you may want to cover:
+| Column       | Type   | Options     |
+| --------     | ------ | ----------- |
+| nickname     | string | null: false |
+| email        | string | null: false |
+| password     | string | null: false |
+| first_name   | string | null: false |
+| last_name    | string | null: false |
+| birthday     | date   | null: false |
 
-* Ruby version
+## Association
 
-* System dependencies
+- has_many :items
+- belongs_to :buys
+- belongs_to :card
 
-* Configuration
 
-* Database creation
+## buys テーブル
 
-* Database initialization
+|  Column       | Type    | Options                        |
+| --------      | ------  | ---------------------------    |
+| user_id       | integer | null: false, foreign_key: true |
+| family_name   | string  | null: false                    |
+| first_name    | string  | null: false                    |
+| post_code     | string	| null: false                    |
+| prefecture    | string	| null: false                    |
+| city          | string	| null: false                    |
+| address       | string	| null: false                    |
+| building      | string  |                                |
+| phone_number  | string  |                                |
 
-* How to run the test suite
+## Association
 
-* Services (job queues, cache servers, search engines, etc.)
+- belongs_to :user
 
-* Deployment instructions
 
-* ...
+## card テーブル
+
+| Column       | Type    | Options                        |
+| --------     | ------  | ---------------------------    |
+| user_id      | integer | null: false, foreign_key: true |
+| customer_id  | string  | null: false                    |
+| card_id      | string  |  null: false                   |
+
+
+## Association
+
+- belongs_to :user
+
+
+
+## items テーブル
+
+| Colum        | Type        | Options                        |
+| --------     | ------      | -----------                    |
+| images       | string      | null: false                    |
+| name         | string      | null: false                    |
+| item_text    | text        | null: false                    |
+| price        | integer     | null: false                    |
+| user_id      | references  | null: false, foreign_key: true |
+
+## Association
+
+- belongs_to :user 
