@@ -24,9 +24,6 @@
 
 |  Column       | Type    | Options                        |
 | --------      | ------  | ---------------------------    |
-| user_id       | integer | null: false, foreign_key: true |
-| family_name   | string  | null: false                    |
-| first_name    | string  | null: false                    |
 | post_code     | string	| null: false                    |
 | prefecture_id | integer	| null: false                    |
 | city          | string	| null: false                    |
@@ -51,12 +48,13 @@
 | condition_id       | integer     | null: false  |
 | shipping_charge_id | integer     | null: false  |
 | product_status_id  | integer     | null: false  |
-| shipping_area_id   |integer      | null: false  |
+| shipping_area_id   | integer     | null: false  |
+| description        | text        | null: false  |
 
 ## Association
 
 - belongs_to :user 
-- belongs_to :history
+- has_one :history
 
 
 ## history テーブル
@@ -68,5 +66,7 @@
 
 ## Association
 
-- has_many :user
-- has_many :items
+- belongs_to :user
+- belongs_to :items
+- has_one :buys
+

@@ -16,7 +16,7 @@
                 <mxCell id="95" value="buys" style="swimlane;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;rounded=1;fontSize=14;fontStyle=0;strokeWidth=2;resizeParent=0;resizeLast=1;shadow=0;dashed=0;align=center;fillColor=none;" vertex="1" parent="1">
                     <mxGeometry x="390" y="180" width="180" height="340" as="geometry"/>
                 </mxCell>
-                <mxCell id="96" value="family_name&#10;&#10;first_name&#10;&#10;post_card&#10;&#10;prefecture_id&#10;&#10;city&#10;&#10;adress&#10;&#10;building_name&#10;&#10;phone_number&#10;&#10;user_id&#10;&#10;history_id&#10;&#10;" style="align=left;strokeColor=none;fillColor=none;spacingLeft=4;fontSize=12;verticalAlign=top;resizable=0;rotatable=0;part=1;" vertex="1" parent="95">
+                <mxCell id="96" value="&#10;&#10;post_card&#10;&#10;prefecture_id&#10;&#10;city&#10;&#10;adress&#10;&#10;building_name&#10;&#10;phone_number&#10;&#10;user_id&#10;&#10;history_id&#10;&#10;" style="align=left;strokeColor=none;fillColor=none;spacingLeft=4;fontSize=12;verticalAlign=top;resizable=0;rotatable=0;part=1;" vertex="1" parent="95">
                     <mxGeometry y="30" width="180" height="310" as="geometry"/>
                 </mxCell>
                 <mxCell id="98" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="95" source="96" target="96">
