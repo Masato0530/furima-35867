@@ -30,7 +30,7 @@
 | address       | string	    | null: false                    |
 | building      | string      |                                |
 | phone_number  | string      | null: false                    |
-| history_id    | references  | null: false                    |
+| history       | references  | foreign_key: true              |
 
 ## Association
 
@@ -39,17 +39,17 @@
 
 ## items テーブル
 
-| Colum              | Type        | Options      |
-| --------           | ------      | -----------  |
-| name               | string      | null: false  |
-| price              | integer     | null: false  |
-| user_id            | references  | null: false  | 
-| category_id        | integer     | null: false  |
-| condition_id       | integer     | null: false  |
-| shipping_charge_id | integer     | null: false  |
-| product_status_id  | integer     | null: false  |
-| shipping_area_id   | integer     | null: false  |
-| description        | text        | null: false  |
+| Colum              | Type        | Options            |
+| --------           | ------      | -----------        |
+| name               | string      | null: false        |
+| price              | integer     | null: false        |
+| user               | references  | foreign_key: true  | 
+| category_id        | integer     | null: false        |
+| condition_id       | integer     | null: false        |
+| shipping_charge_id | integer     | null: false        |
+| product_status_id  | integer     | null: false        |
+| shipping_area_id   | integer     | null: false        |
+| description        | text        | null: false        |
 
 ## Association
 
@@ -59,10 +59,10 @@
 
 ## history テーブル
 
-| Colum              | Type           | Options      |
-| --------           | ------         | -----------  |
-| user_id            | references     | null: false  |
-| items_id           | references     | null: false  |
+| Colum              | Type           | Options            |
+| --------           | ------         | -----------        |
+| user               | references     | foreign_key: true  |
+| items              | references     | foreign_key: true  |
 
 ## Association
 
