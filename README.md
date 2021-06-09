@@ -2,20 +2,21 @@
 
 ## users テーブル
 
-| Column               | Type   | Options     |
-| --------             | ------ | ----------- |
-| nickname             | string | null: false |
-| email                | string | null: false |
-| encrypted_password   | string | null: false |
-| first_name           | string | null: false |
-| last_name            | string | null: false |
-| birthday             | date   | null: false |
+| Column               | Type   | Options                   |
+| --------             | ------ | -----------               |
+| nickname             | string | null: false               |
+| email                | string | null: false, unique: true |
+| encrypted_password   | string | null: false               |
+| first_name           | string | null: false               |
+| last_name            | string | null: false               |
+| first_name_kana      | string | null: false               |
+| last_name_kana       | string | null: false               |
+| birthday             | date   | null: false               |
 
 ## Association
 
 - has_many :items
-- belongs_to :buys
-- belongs_to :card
+
 
 
 ## buys テーブル
@@ -26,42 +27,42 @@
 | family_name   | string  | null: false                    |
 | first_name    | string  | null: false                    |
 | post_code     | string	| null: false                    |
-| prefecture    | string	| null: false                    |
+| prefecture_id | integer	| null: false                    |
 | city          | string	| null: false                    |
 | address       | string	| null: false                    |
 | building      | string  |                                |
-| phone_number  | string  |                                |
+| phone_number  | string  | null: false                                |
 
 ## Association
 
 - belongs_to :user
-
-
-## card テーブル
-
-| Column       | Type    | Options                        |
-| --------     | ------  | ---------------------------    |
-| user_id      | integer | null: false, foreign_key: true |
-| customer_id  | string  | null: false                    |
-| card_id      | string  |  null: false                   |
-
-
-## Association
-
-- belongs_to :user
-
 
 
 ## items テーブル
 
-| Colum        | Type        | Options                        |
-| --------     | ------      | -----------                    |
-| images       | string      | null: false                    |
-| name         | string      | null: false                    |
-| item_text    | text        | null: false                    |
-| price        | integer     | null: false                    |
-| user_id      | references  | null: false, foreign_key: true |
+| Colum              | Type        | Options      |
+| --------           | ------      | -----------  |
+| name               | string      | null: false  |
+| price              | integer     | null: false  |
+| user_id            | integer     | null: false  | 
+| category_id        | integer     | null: false  |
+| condition_id       | integer     | null: false  |
+| shipping_charge_id | integer     | null: false  |
+| product_status_id  | integer     | null: false  |
+| shipping_area_id   |integer      | null: false  |
 
 ## Association
 
 - belongs_to :user 
+
+
+## history テーブル
+
+| Colum              | Type        | Options      |
+| --------           | ------      | -----------  |
+| user_id            | integer     | null: false  |
+| items_id           | integer     | null: false  |
+
+## Association
+
+- has_many :user
