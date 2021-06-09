@@ -16,6 +16,7 @@
 ## Association
 
 - has_many :items
+- has_many :history
 
 
 
@@ -31,11 +32,12 @@
 | city          | string	| null: false                    |
 | address       | string	| null: false                    |
 | building      | string  |                                |
-| phone_number  | string  | null: false                                |
+| phone_number  | string  | null: false                    |
+| history_id    | string  | null: false                    |
 
 ## Association
 
-- belongs_to :user
+
 
 
 ## items テーブル
@@ -54,6 +56,7 @@
 ## Association
 
 - belongs_to :user 
+- belongs_to :history
 
 
 ## history テーブル
@@ -66,3 +69,4 @@
 ## Association
 
 - has_many :user
+- has_many :items
