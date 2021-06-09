@@ -22,15 +22,15 @@
 
 ## buys テーブル
 
-|  Column       | Type        | Options                        |
-| --------      | ------      | ---------------------------    |
-| post_code     | string	    | null: false                    |
-| prefecture_id | integer	    | null: false                    |
-| city          | string	    | null: false                    |
-| address       | string	    | null: false                    |
-| building      | string      |                                |
-| phone_number  | string      | null: false                    |
-| history       | references  | foreign_key: true              |
+|  Column           | Type        | Options                        |
+| --------          | ------      | ---------------------------    |
+| post_code         | string	    | null: false                    |
+| shipping_area_id  | integer	    | null: false                    |
+| city              | string	    | null: false                    |
+| address           | string	    | null: false                    |
+| building          | string      |                                |
+| phone_number      | string      | null: false                    |
+| history           | references  | foreign_key: true              |
 
 ## Association
 
