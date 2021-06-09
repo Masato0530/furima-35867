@@ -34,7 +34,7 @@
 
 ## Association
 
-- has_one :history
+- belongs_to :history
 
 
 ## items テーブル
@@ -57,12 +57,12 @@
 - has_one :history
 
 
-## history テーブル
+## histories テーブル
 
 | Colum              | Type           | Options            |
 | --------           | ------         | -----------        |
 | user               | references     | foreign_key: true  |
-| items              | references     | foreign_key: true  |
+| item              | references     | foreign_key: true  |
 
 ## Association
 
