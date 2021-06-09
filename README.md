@@ -16,25 +16,25 @@
 ## Association
 
 - has_many :items
-- has_many :history
+- has_many :histories
 
 
 
 ## buys テーブル
 
-|  Column       | Type    | Options                        |
-| --------      | ------  | ---------------------------    |
-| post_code     | string	| null: false                    |
-| prefecture_id | integer	| null: false                    |
-| city          | string	| null: false                    |
-| address       | string	| null: false                    |
-| building      | string  |                                |
-| phone_number  | string  | null: false                    |
-| history_id    | string  | null: false                    |
+|  Column       | Type        | Options                        |
+| --------      | ------      | ---------------------------    |
+| post_code     | string	    | null: false                    |
+| prefecture_id | integer	    | null: false                    |
+| city          | string	    | null: false                    |
+| address       | string	    | null: false                    |
+| building      | string      |                                |
+| phone_number  | string      | null: false                    |
+| history_id    | references  | null: false                    |
 
 ## Association
 
-
+- has_one :history
 
 
 ## items テーブル
@@ -43,7 +43,7 @@
 | --------           | ------      | -----------  |
 | name               | string      | null: false  |
 | price              | integer     | null: false  |
-| user_id            | integer     | null: false  | 
+| user_id            | references  | null: false  | 
 | category_id        | integer     | null: false  |
 | condition_id       | integer     | null: false  |
 | shipping_charge_id | integer     | null: false  |
@@ -59,14 +59,14 @@
 
 ## history テーブル
 
-| Colum              | Type        | Options      |
-| --------           | ------      | -----------  |
-| user_id            | integer     | null: false  |
-| items_id           | integer     | null: false  |
+| Colum              | Type           | Options      |
+| --------           | ------         | -----------  |
+| user_id            | references     | null: false  |
+| items_id           | references     | null: false  |
 
 ## Association
 
 - belongs_to :user
-- belongs_to :items
-- has_one :buys
+- belongs_to :item
+- has_one :buy
 
