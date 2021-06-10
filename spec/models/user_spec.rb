@@ -6,13 +6,13 @@ describe User do
   end
   describe 'ユーザー新規登録機能' do
     context '新規登録がうまくいくとき' do
-      it 'nicknameとemail、encrypted_passwordとencrypted_password_confirmation、first_nameとlast_name、first_name_kanaとlast_name_kana、birthdayが存在すれば登録できること' do
+      it 'nicknameとemail、passwordとpassword_confirmation、first_nameとlast_name、first_name_kanaとlast_name_kana、birthdayが存在すれば登録できること' do
         expect(@user).to be_valid
       end
 
-      it 'encrypted_passwordが6文字以上であれば登録できること' do
-        @user.encrypted_password
-        @user.encrypted_password_confirmation
+      it 'passwordが6文字以上であれば登録できること' do
+        @user.password
+        @user.password_confirmation
         expect(@user).to be_valid
       end
     end
@@ -30,16 +30,16 @@ describe User do
         expect(@user.errors.full_messages).to include("Email can't be blank")
       end
 
-      it 'encrypted_passwordが空では登録できないこと' do
-        @user.encrypted_password = nil
+      it 'passwordが空では登録できないこと' do
+        @user.password = nil
         @user.valid?
         expect(@user.errors.full_messages).to include("Password can't be blank")
       end
 
-      it 'encrypted_passwordが存在してもencrypted_password_confirmationが空では登録できないこと' do
-        @user.encrypted_password_confirmation = ''
+      it 'passwordが存在してもpassword_confirmationが空では登録できないこと' do
+        @user.password_confirmation = ''
         @user.valid?
-        expect(@user.errors.full_messages).to include("Encrypted_password confirmation doesn't match Encrypted_password")
+        expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
       end
 
       it 'first_nameが空では登録出来ないこと' do
@@ -63,19 +63,19 @@ describe User do
       it 'first_name_kanaが空では登録出来ないこと' do
         @user.first_name_kana = nil
         @user.valid?
-        expect(@user.errors.full_messages).to include("First name pkey can't be blank")
+        expect(@user.errors.full_messages).to include("First name kana can't be blank")
       end
 
       it 'last_name_kanaが空では登録出来ないこと' do
         @user.last_name_kana = nil
         @user.valid?
-        expect(@user.errors.full_messages).to include("Last name pkey can't be blank")
+        expect(@user.errors.full_messages).to include("Last name kana can't be blank")
       end
 
       it 'first_name_kanaが存在してもlast_name_pkeyが空では登録できないこと' do
         @user.last_name_kana = ''
         @user.valid?
-        expect(@user.errors.full_messages).to include("Last name pkey can't be blank")
+        expect(@user.errors.full_messages).to include("Last name kana can't be blank")
       end
 
       it 'birthdayが空では登録出来ないこと' do
@@ -84,11 +84,11 @@ describe User do
         expect(@user.errors.full_messages).to include("Birthday can't be blank")
       end
 
-      it 'encrypted_passwordが5文字以下であれば登録できないこと' do
-        @user.encrypted_password = '12345'
-        @user.encrypted_password_confirmation = '12345'
+      it 'passwordが5文字以下であれば登録できないこと' do
+        @user.password = '12345'
+        @user.password_confirmation = '12345'
         @user.valid?
-        expect(@user.errors.full_messages).to include('Encrypted_password is too short (minimum is 6 characters)')
+        expect(@user.errors.full_messages).to include('Password is too short (minimum is 6 characters)')
       end
 
       it '重複したemailが存在する場合登録できないこと' do
