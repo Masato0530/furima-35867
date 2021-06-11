@@ -47,6 +47,12 @@ describe User do
         @user.valid?
         expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
       end
+      
+      it "passwordは英数字混合でないと登録できない" do
+        @user.password = "000000"
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Password には英字と数字の両方を含めて設定してください")
+      end
 
       it 'first_nameが空では登録出来ないこと' do
         @user.first_name = nil
