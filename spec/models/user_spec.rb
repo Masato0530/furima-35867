@@ -66,11 +66,24 @@ describe User do
         expect(@user.errors.full_messages).to include("Password には英字と数字の両方を含めて設定してください")
       end
 
+      it "passwordが存在してもpassword_confirmationがない場合は登録できないこと" do
+        user = build(:user, password_confirmation: "")
+        user.valid?
+        expect(user.errors[:password_confirmation]).to include("とパスワードの入力が一致しません")
+      end
+
       it 'first_nameが空では登録出来ないこと' do
         @user.first_name = nil
         @user.valid?
         expect(@user.errors.full_messages).to include("First name can't be blank")
       end
+      
+      it 'first_name_kanaが空では登録出来ないこと' do
+        @user.first_name = nil
+        @user.valid?
+        expect(@user.errors.full_messages).to include("First name kana can't be blank")
+      end
+      
 
       it 'last_nameが空では登録出来ないこと' do
         @user.last_name = nil
@@ -124,6 +137,18 @@ describe User do
 
       it 'last_name_kanaは全角（カタカナ）でなければ登録できない' do
         @user.last_name_kana = 'かたかな'
+        @user.valid?
+        expect(@user.errors[:last_name_kana]).to include("is invalid. Input full-width katakana characters.")
+      end
+
+      it 'last_name_kanaは半角文字だと登録できない' do
+        @user.last_name_kana = 'ｶﾀｶﾅ'
+        @user.valid?
+        expect(@user.errors[:last_name_kana]).to include("is invalid. Input full-width katakana characters.")
+      end
+
+      it 'first_name_kanaは半角文字だと登録できない' do
+        @user.first_name_kana = 'ｶﾀｶﾅ'
         @user.valid?
         expect(@user.errors[:last_name_kana]).to include("is invalid. Input full-width katakana characters.")
       end
