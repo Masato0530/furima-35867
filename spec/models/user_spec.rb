@@ -30,6 +30,12 @@ describe User do
         expect(@user.errors.full_messages).to include("Email can't be blank")
       end
 
+      it 'emailは@を含むこと' do
+        @user.email = 'nbrmcisample.com'
+        @user.valid?
+        expect(@user.errors[:email]).to include("is invalid")
+      end
+
       it 'passwordが空では登録できないこと' do
         @user.password = nil
         @user.valid?
@@ -54,26 +60,8 @@ describe User do
         expect(@user.errors.full_messages).to include("Last name can't be blank")
       end
 
-      it 'first_nameが存在してもlast_nameが空では登録できないこと' do
-        @user.last_name = ''
-        @user.valid?
-        expect(@user.errors.full_messages).to include("Last name can't be blank")
-      end
-
-      it 'first_name_kanaが空では登録出来ないこと' do
-        @user.first_name_kana = nil
-        @user.valid?
-        expect(@user.errors.full_messages).to include("First name kana can't be blank")
-      end
-
       it 'last_name_kanaが空では登録出来ないこと' do
         @user.last_name_kana = nil
-        @user.valid?
-        expect(@user.errors.full_messages).to include("Last name kana can't be blank")
-      end
-
-      it 'first_name_kanaが存在してもlast_name_pkeyが空では登録できないこと' do
-        @user.last_name_kana = ''
         @user.valid?
         expect(@user.errors.full_messages).to include("Last name kana can't be blank")
       end
@@ -96,6 +84,30 @@ describe User do
         another_user = FactoryBot.build(:user, email: @user.email)
         another_user.valid?
         expect(another_user.errors.full_messages).to include('Email has already been taken')
+      end
+
+      it 'first_nameは全角（漢字・ひらがな・カタカナ）でなければ登録できない' do
+        @user.first_name = 'nbr123'
+        @user.valid?
+        expect(@user.errors[:first_name]).to include("is invalid. Input full-width characters.")
+      end
+
+      it 'last_nameは全角（漢字・ひらがな・カタカナ）でなければ登録できない' do
+        @user.last_name = 'nbr123'
+        @user.valid?
+        expect(@user.errors[:last_name]).to include("is invalid. Input full-width characters.")
+      end
+
+      it 'first_name_kanaは全角（カタカナ）でなければ登録できない' do
+        @user.first_name_kana = 'かたかな'
+        @user.valid?
+        expect(@user.errors[:first_name_kana]).to include("is invalid. Input full-width katakana characters.")
+      end
+
+      it 'last_name_kanaは全角（カタカナ）でなければ登録できない' do
+        @user.last_name_kana = 'かたかな'
+        @user.valid?
+        expect(@user.errors[:last_name_kana]).to include("is invalid. Input full-width katakana characters.")
       end
     end
   end
