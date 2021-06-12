@@ -111,8 +111,8 @@ describe User do
       end
 
       it 'passwordが5文字以下であれば登録できないこと' do
-        @user.password = '12345'
-        @user.password_confirmation = '12345'
+        @user.password = '11aaa'
+        @user.password_confirmation = '11aaa'
         @user.valid?
         expect(@user.errors.full_messages).to include('Password is too short (minimum is 6 characters)')
       end
