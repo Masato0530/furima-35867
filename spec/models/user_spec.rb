@@ -72,6 +72,13 @@ describe User do
         expect(user.errors[:password_confirmation]).to include("とパスワードの入力が一致しません")
       end
 
+      it "パスワードとパスワード（確認用)は値が一致しないと登録できないこと" do
+        @user.password = '12345a'
+        @user.password_confirmation = '12345b'
+        @user.valid?        
+        expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
+        end
+
       it 'first_nameが空では登録出来ないこと' do
         @user.first_name = nil
         @user.valid?
