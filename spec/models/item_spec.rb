@@ -3,18 +3,12 @@ require 'rails_helper'
 RSpec.describe Item, type: :model do
      describe '出品商品の保存' do
        before do
-         @user = FactoryBot.create(:user)
          @item = FactoryBot.build(:item)
          
        end
   
        context '出品がうまくいくとき' do
          it '全ての値が正しく入力されていたら保存できること' do
-           expect(@item).to be_valid
-         end
-  
-         it 'priceの範囲が、半角数字の入力で、¥300〜¥9,999,999だと保存できること' do
-           @item.price = 400
            expect(@item).to be_valid
          end
        end
@@ -76,13 +70,13 @@ RSpec.describe Item, type: :model do
          end
   
          it 'priceが、¥300より安いと保存できないこと' do
-           @item.price = '299'
+           @item.price = 299
            @item.valid?
            expect(@item.errors.full_messages).to include('Price must be greater than 300')
          end
   
          it 'priceが、¥9,999,999より高いと保存できないこと' do
-           @item.price = '10000000'
+           @item.price = 10000000
            @item.valid?
            expect(@item.errors.full_messages).to include('Price must be less than 9999999')
          end
@@ -92,6 +86,43 @@ RSpec.describe Item, type: :model do
            @item.valid?
            expect(@item.errors.full_messages).to include('Price is not a number')
          end
+
+         it 'priceには"半角英数混合では登録できないこと' do
+           @item.price = 'だめ'
+           @item.valid?
+           expect(@item.errors.full_messages).to include('Price is not a number')
+         end
+
+         it 'category_idが1では登録できないこと' do
+           @item.category_id = 1
+           @item.valid?
+           expect(@item.errors.full_messages).to include('Category must be other than 1')
+         end
+
+         it 'condition_idが1では登録できないこと' do
+          @item.condition_id = 1
+          @item.valid?
+          expect(@item.errors.full_messages).to include('Condition must be other than 1')
+        end
+      
+        it 'shipping_charge_idが1では登録できないこと' do
+          @item.shipping_charge_id = 1
+          @item.valid?
+          expect(@item.errors.full_messages).to include('Shipping charge must be other than 1')
+        end
+
+        it 'shipping_area_idが1では登録できないこと' do
+          @item.shipping_area_id = 1
+          @item.valid?
+          expect(@item.errors.full_messages).to include('Shipping area must be other than 1')
+        end
+
+        it 'products_status_idが1では登録できないこと' do
+          @item.products_status_id = 1
+          @item.valid?
+          expect(@item.errors.full_messages).to include('Products status must be other than 1')
+        end
+
        end
      end
   end

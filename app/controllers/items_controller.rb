@@ -2,7 +2,7 @@ class ItemsController < ApplicationController
   before_action :authenticate_user!, except: :index
 
     def index
-    @items = Item.includes(:user).order('created_at DESC')
+  #  @items = Item.includes(:user).order('created_at DESC')
   end
 
   def new
@@ -11,7 +11,7 @@ class ItemsController < ApplicationController
   
   def create
     @item = Item.new(item_params)
-    if @item.valid?
+    if @item.save
       @item.save
       redirect_to root_path
     else
@@ -19,9 +19,9 @@ class ItemsController < ApplicationController
     end
   end
 
-  def edit
-    @items_tag = ItemsTag.new
-  end
+  #def edit
+    #@items_tag = ItemsTag.new
+  #end
 
 
   private
@@ -43,10 +43,6 @@ class ItemsController < ApplicationController
 
   def set_item
     @item = Item.find(params[:id])
-  end
-
-  def move_to_index
-    redirect_to action: :index unless user_signed_in?
   end
 
 end
