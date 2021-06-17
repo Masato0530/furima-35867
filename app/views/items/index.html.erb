@@ -123,9 +123,8 @@
     <div class="subtitle" >
       新規投稿商品
     </div>
+    <% @items.each do |item| %>
     <ul class='item-lists'>
-  <% @items.each do |item| %>
-      <%# 商品のインスタンス変数になにか入っている場合、中身のすべてを展開できるようにしましょう %>
       <li class='list'>
         <%= link_to "#" do %>
         <div class='item-img-content'>
@@ -153,13 +152,9 @@
         <% end %>
       </li>
       <% end %>
-      <%# //商品のインスタンス変数になにか入っている場合、中身のすべてを展開できるようにしましょう %>
-
-      <%# 商品がない場合は以下のダミー商品が表示されるようにしましょう %>
-      <%# 商品がある場合は表示されないようにしましょう %>
       <li class='list'>
+      <% if @items.length == 0 %>
         <%= link_to '#' do %>
-       <% if @items.length == 0 %>
         <%= image_tag "https://tech-master.s3.amazonaws.com/uploads/curriculums/images/Rails1-4/sample.jpg", class: "item-img" %>
         <div class='item-info'>
           <h3 class='item-name'>
@@ -174,10 +169,8 @@
           </div>
         </div>
         <% end %>
+        </li>
       <% end %>
-      </li>
-      <%# //商品がある場合は表示されないようにしましょう %>
-      <%# //商品がない場合は以下のダミー商品が表示されるようにしましょう %>
     </ul>
   </div>
   <%# //商品一覧 %>
