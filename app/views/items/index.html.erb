@@ -123,9 +123,9 @@
     <div class="subtitle" >
       新規投稿商品
     </div>
-    <% @items.each do |item| %>
     <ul class='item-lists'>
-      <li class='list'>
+    <% @items.each do |item| %>
+    <li class='list'>
         <%= link_to "#" do %>
         <div class='item-img-content'>
           <%= image_tag item.image, class: "item-img" %>
