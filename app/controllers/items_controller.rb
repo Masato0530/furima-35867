@@ -12,7 +12,6 @@ class ItemsController < ApplicationController
   def create
     @item = Item.new(item_params)
     if @item.save
-      @item.save
       redirect_to root_path
     else
       render :new
@@ -36,7 +35,6 @@ class ItemsController < ApplicationController
       :shipping_area_id,
       :products_status_id,
       :price,
-      :user_id,
       :image
     ).merge(user_id: current_user.id)
   end
