@@ -23,9 +23,20 @@ class ItemsController < ApplicationController
   end
 
 
-  #def edit
-    #@items_tag = ItemsTag.new
-  #end
+  def edit
+    @item = Item.find(params[:id])
+    if current_user =! @item.user
+       redirect_to root_path
+    end
+  end
+
+  def update
+    if @item.update(item_params)
+      redirect_to item_path
+    else
+      render :edit
+    end
+  end
 
 
   private
