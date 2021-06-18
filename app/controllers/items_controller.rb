@@ -44,8 +44,8 @@ class ItemsController < ApplicationController
     ).merge(user_id: current_user.id)
   end
 
-  def set_item
-    @item = Item.find(params[:id])
-  end
+  #def set_item
+    #@item = Item.find(params[:id])
+  #end
 
 end
