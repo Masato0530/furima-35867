@@ -14,6 +14,6 @@ class HistoryBuy
   
     def save
       history = History.create(user_id: user_id, item_id: item_id)
-      Buy.create(post_code: post_code,  shipping_area: shipping_area_id, city: city, address: address, building: building, phone_number: phone_number, history_id: history.id)
+      Buy.create(post_code: post_code,  shipping_area_id: shipping_area_id, city: city, address: address, building: building, phone_number: phone_number, history_id: history.id)
     end
 end

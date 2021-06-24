@@ -1,4 +1,6 @@
 class OrdersController < ApplicationController
+  before_action :authenticate_user!, only: :index
+  before_action :item_id_search
   before_action :correct_user, only: :index
   before_action :move_to_login, only: :index
  
@@ -8,10 +10,9 @@ class OrdersController < ApplicationController
 
   def create
     @history_buy = HistoryBuy.new(history_params)
-    
     if @history_buy.valid?
-      pay_item
       @history_buy.save
+      pay_item
       return redirect_to root_path
     else
       render :index
@@ -24,6 +25,10 @@ class OrdersController < ApplicationController
     unless user_signed_in?
       redirect_to new_item_path
     end
+  end
+
+  def item_id_search
+    @item = Item.find(params[:item_id])
   end
 
   def correct_user
@@ -40,7 +45,7 @@ class OrdersController < ApplicationController
   end
 
   def history_params
-    params.require(:history_buy).permit(:post_code, :shipping_area_id, :city, :address, :building, :phone_number, :token).merge(user_id: current_user.id, item_id: params[:item_id] )
+    params.require(:history_buy).permit(:post_code, :shipping_area_id, :city, :address, :building, :phone_number).merge(user_id: current_user.id, item_id: params[:item_id], token: params[:token])
   end
 
   def pay_item
@@ -51,4 +56,6 @@ class OrdersController < ApplicationController
       currency: 'jpy'
     )
   end
+
+
 end
