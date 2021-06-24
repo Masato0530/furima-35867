@@ -6,9 +6,6 @@ class OrdersController < ApplicationController
  
   def index
     @history_buy = HistoryBuy.new
-    if current_user == @item.user
-      redirect_to root_path
-    end
   end
 
   def create
@@ -23,10 +20,10 @@ class OrdersController < ApplicationController
   end
 
   private
-
+  
   def move_to_login
     unless user_signed_in?
-      redirect_to new_item_path
+      redirect_to root_path
     end
   end
 
