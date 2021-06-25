@@ -62,7 +62,7 @@ class ItemsController < ApplicationController
   end
 
   def set_items
-    if current_user != @item.user
+    if current_user != @item.user || @item.history.present?
       redirect_to root_path
     end
   end

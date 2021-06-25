@@ -26,7 +26,7 @@ class OrdersController < ApplicationController
   end
 
   def correct_user
-    if @item.user == current_user && @item.history.present?
+    if @item.user == current_user || @item.history.present?
       redirect_to root_path
     end
   end
