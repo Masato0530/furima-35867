@@ -32,6 +32,12 @@ RSpec.describe HistoryBuy, type: :model do
         @history_buy.valid?
         expect(@history_buy.errors.full_messages).to include("Shipping area can't be blank")
       end
+
+      it 'shipping_area_idが0だと登録できないこと' do
+        @history_buy.shipping_area_id = 0
+        @history_buy.valid?
+        expect(@history_buy.errors.full_messages).to include("Shipping area can't be blank")
+      end
       it 'cityが空だと保存できないこと' do
         @history_buy.city = nil
         @history_buy.valid?
