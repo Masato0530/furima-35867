@@ -128,11 +128,11 @@
         <div class='item-img-content'>
           <%= image_tag item.image, class: "item-img" %>
 
-          <%# 商品が売れていればsold outを表示しましょう %>
+          <% if item.history.present? %>
           <div class='sold-out'>
             <span>Sold Out!!</span>
           </div>
-          <%# //商品が売れていればsold outを表示しましょう %>
+          <% end %> 
 
         </div>
         <div class='item-info'>
@@ -177,4 +177,5 @@
   <span class='purchase-btn-text'>出品する</span>
 <%= link_to image_tag('icon_camera.png', size: '185x50' ,class: "purchase-btn-icon"), new_item_path %>
 </div>
+
 <%= render "shared/footer" %>
