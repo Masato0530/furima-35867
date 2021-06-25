@@ -28,7 +28,7 @@ RSpec.describe HistoryBuy, type: :model do
         expect(@history_buy.errors.full_messages).to include("Post code can't be blank")
       end
       it 'shipping_area_idが空だと保存できないこと' do
-        @history_buy.shipping_area_id = '0'
+        @history_buy.shipping_area_id = nil
         @history_buy.valid?
         expect(@history_buy.errors.full_messages).to include("Shipping area can't be blank")
       end

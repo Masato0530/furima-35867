@@ -123,6 +123,18 @@ RSpec.describe Item, type: :model do
           expect(@item.errors.full_messages).to include('Products status must be other than 1')
         end
 
+        it'user_idが空では購入できないこと' do
+          @item.user_id = nil
+          @item.valid?
+          expect(@item.errors.full_messages).to include("User can't be blank" 'User is not a number')
+        end
+
+        it'item_idが空では購入できないこと' do
+          @item.item_id = nil
+          @item.valid?
+          expect(@item.errors.full_messages).to include("Item can't be blank" 'Item is not a number')
+        end
+
        end
      end
   end

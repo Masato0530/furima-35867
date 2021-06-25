@@ -2,7 +2,6 @@ class OrdersController < ApplicationController
   before_action :authenticate_user!, only: :index
   before_action :item_id_search
   before_action :correct_user, only: :index
-  before_action :move_to_login, only: :index
  
   def index
     @history_buy = HistoryBuy.new
@@ -20,19 +19,14 @@ class OrdersController < ApplicationController
   end
 
   private
-  
-  def move_to_login
-    unless user_signed_in?
-      redirect_to root_path
-    end
-  end
+
 
   def item_id_search
     @item = Item.find(params[:item_id])
   end
 
   def correct_user
-    if @item.user == current_user
+    if @item.user == current_user && @item.history.present?
       redirect_to root_path
     end
   end
