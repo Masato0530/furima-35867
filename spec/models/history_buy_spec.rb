@@ -67,10 +67,34 @@ RSpec.describe HistoryBuy, type: :model do
         @history_buy.valid?
         expect(@history_buy.errors.full_messages).to include("Phone number is invalid.")
       end
+
+      it 'phone_numberは9桁以下では登録できないこと' do
+        @history_buy.phone_number = '12345678'
+        @history_buy.valid?
+        expect(@history_buy.errors.full_messages).to include("Phone number is invalid.")
+      end
+
       it 'phone_numberがハイフン入りでは保存できないこと' do
         @history_buy.phone_number = '123-456-890'
         @history_buy.valid?
         expect(@history_buy.errors.full_messages).to include("Phone number is invalid.")
+      end
+      
+      it 'phone_numberは英数混合では登録できないこと' do
+        @history_buy.phone_number = 'aa11'
+        @history_buy.valid?
+        expect(@history_buy.errors.full_messages).to include("Phone number is invalid.")
+
+      it'user_idが空では購入できないこと' do
+        @item.user_id = nil
+        @item.valid?
+        expect(@item.errors.full_messages).to include("User can't be blank" 'User is not a number')
+      end
+
+      it'item_idが空では購入できないこと' do
+        @item.item_id = nil
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Item can't be blank" 'Item is not a number')
       end
     end
   end
