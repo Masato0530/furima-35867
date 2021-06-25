@@ -31,13 +31,6 @@ class OrdersController < ApplicationController
     end
   end
 
-  def item_history
-    @item = Item.find(params[:item_id])
-    if @item.history.present?
-      redirect_to root_path
-    end
-  end
-
   def history_params
     params.require(:history_buy).permit(:post_code, :shipping_area_id, :city, :address, :building, :phone_number).merge(user_id: current_user.id, item_id: params[:item_id], token: params[:token])
   end
