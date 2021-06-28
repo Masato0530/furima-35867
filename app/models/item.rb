@@ -17,7 +17,7 @@ class Item < ApplicationRecord
     validates :shipping_charge_id
     validates :shipping_area_id
     validates :products_status_id
-    validates :price, numericality: { only_integer: true, greater_than: 300, less_than: 9999999 }
+    validates :price, numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999 }
     validates :description
     validates :image
   end 

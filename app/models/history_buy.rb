@@ -11,7 +11,7 @@ class HistoryBuy
     validates :item_id
     validates :phone_number, format: {with: /\A\d{10}\z|\A\d{11}\z/ , message: "is invalid."}
   end
-    validates :shipping_area_id, numericality: { other_than: 0, message: "can't be blank" }
+    validates :shipping_area_id, numericality: { other_than: 1, message: "can't be blank" }
   
     def save
       history = History.create(user_id: user_id, item_id: item_id)
